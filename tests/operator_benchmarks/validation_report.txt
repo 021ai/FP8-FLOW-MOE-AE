@@ -1,0 +1,76 @@
+================================================================================
+FP8-FLOW-MoE Operator Benchmarks — Results Report
+================================================================================
+
+  Fused Permute and Padding (Section 4.4.1)
+--------------------------------------------------------------------------------
+  permute+padding speedup (BF16 & FP8)  |  Actual: [1.38x, 2.26x]  Expect: [0.76x, 1.70x]
+
+      Config                               Item                                Actual      Expect
+      -----------------------------------  ------------------------------  ----------  ----------
+      (4096, 64, 1280, 7)                  bf16_perm_pad_speedup                1.46x       0.76x
+      (4096, 64, 1280, 7)                  fp8_perm_pad_speedup                 1.47x       1.03x
+      (4096, 64, 2048, 6)                  bf16_perm_pad_speedup                1.38x       0.79x
+      (4096, 64, 2048, 6)                  fp8_perm_pad_speedup                 1.50x       1.05x
+      (4096, 160, 5120, 6)                 bf16_perm_pad_speedup                1.77x       1.08x
+      (4096, 160, 5120, 6)                 fp8_perm_pad_speedup                 1.90x       1.30x
+      (4096, 256, 7168, 8)                 bf16_perm_pad_speedup                1.57x       1.26x
+      (4096, 256, 7168, 8)                 fp8_perm_pad_speedup                 2.04x       1.39x
+      (4096, 384, 8192, 8)                 bf16_perm_pad_speedup                1.55x       1.34x
+      (4096, 384, 8192, 8)                 fp8_perm_pad_speedup                 2.26x       1.55x
+      (4096, 512, 9216, 8)                 bf16_perm_pad_speedup                1.61x       1.39x
+      (4096, 512, 9216, 8)                 fp8_perm_pad_speedup                 2.24x       1.70x
+
+  unpermute+unpadding speedup (BF16 & FP8)  |  Actual: [4.05x, 8.14x]  Expect: [4.24x, 7.33x]
+
+      Config                               Item                                Actual      Expect
+      -----------------------------------  ------------------------------  ----------  ----------
+      (4096, 64, 1280, 7)                  bf16_unperm_unpad_speedup            4.90x       4.24x
+      (4096, 64, 1280, 7)                  fp8_unperm_unpad_speedup             4.05x       4.25x
+      (4096, 64, 2048, 6)                  bf16_unperm_unpad_speedup            4.32x       4.41x
+      (4096, 64, 2048, 6)                  fp8_unperm_unpad_speedup             4.09x       4.65x
+      (4096, 160, 5120, 6)                 bf16_unperm_unpad_speedup            6.98x       6.60x
+      (4096, 160, 5120, 6)                 fp8_unperm_unpad_speedup             7.04x       5.79x
+      (4096, 256, 7168, 8)                 bf16_unperm_unpad_speedup            6.81x       6.90x
+      (4096, 256, 7168, 8)                 fp8_unperm_unpad_speedup             5.89x       5.52x
+      (4096, 384, 8192, 8)                 bf16_unperm_unpad_speedup            7.93x       7.33x
+      (4096, 384, 8192, 8)                 fp8_unperm_unpad_speedup             6.68x       6.12x
+      (4096, 512, 9216, 8)                 bf16_unperm_unpad_speedup            8.14x       7.31x
+      (4096, 512, 9216, 8)                 fp8_unperm_unpad_speedup             7.77x       6.57x
+
+
+  Fused SwiGLU and Quantization (Section 4.4.3)
+--------------------------------------------------------------------------------
+  Forward fused SwiGLU+Quant speedup  |  Actual: [1.51x, 2.12x]  Expect: [1.69x, 2.18x]
+
+      Config                               Item                                Actual      Expect
+      -----------------------------------  ------------------------------  ----------  ----------
+      (4096, 1280, 64, 7, 1024)            fwd_speedup                          1.51x       1.69x
+      (4096, 2048, 64, 6, 1408)            fwd_speedup                          1.89x       2.09x
+      (4096, 5120, 160, 6, 1536)           fwd_speedup                          2.12x       2.07x
+      (4096, 7168, 256, 8, 2048)           fwd_speedup                          2.12x       2.18x
+
+  Backward fused SwiGLU+Quant speedup  |  Actual: [2.55x, 3.88x]  Expect: [2.56x, 4.01x]
+
+      Config                               Item                                Actual      Expect
+      -----------------------------------  ------------------------------  ----------  ----------
+      (4096, 1280, 64, 7, 1024)            bwd_speedup                          2.55x       2.56x
+      (4096, 2048, 64, 6, 1408)            bwd_speedup                          3.88x       3.91x
+      (4096, 5120, 160, 6, 1536)           bwd_speedup                          3.85x       3.91x
+      (4096, 7168, 256, 8, 2048)           bwd_speedup                          3.62x       4.01x
+
+
+  Scaling-aware FP8 Transpose (Section 4.4.4)
+--------------------------------------------------------------------------------
+  Scaling-aware FP8 transpose speedup  |  Actual: [1.70x, 2.25x]  Expect: [2.30x, 3.06x]
+
+      Config                               Item                                Actual      Expect
+      -----------------------------------  ------------------------------  ----------  ----------
+      (28672,1280)                         speedup                              2.25x       2.31x
+      (24576,2048)                         speedup                              1.85x       2.77x
+      (24576,5120)                         speedup                              1.91x       3.06x
+      (32768,7168)                         speedup                              1.74x       2.58x
+      (32768,8192)                         speedup                              1.72x       2.60x
+      (32768,9216)                         speedup                              1.70x       2.62x
+
+================================================================================

@@ -1,0 +1,18 @@
+# Expected component ablation results from the paper (Table 7).
+# All ablations run on DeepSeek-V3 (671B) with AC=full.
+# TGS: tokens/GPU/s (higher is better). Mem: peak GPU memory in GB/GPU (lower is better).
+# method values:
+#   fp8flowmoe            - full FP8-FLOW-MoE (non-ablated baseline)
+#   perm_pad              - fp8flowmoe with unfused permute+padding (separate permute and padding ops)
+#   double_quant          - fp8flowmoe with DoubleQuant transpose (dequantize->transpose->requantize)
+# Source: Table 7 in "FP8-FLOW-MoE" (MLSys 2026).
+model,ac_mode,method,ep,tgs,mem
+deepseekv3,full,fp8flowmoe,ep8,1176,37
+deepseekv3,full,perm_pad,ep8,1130,37
+deepseekv3,full,double_quant,ep8,1028,38
+deepseekv3,full,fp8flowmoe,ep16,1012,40
+deepseekv3,full,perm_pad,ep16,967,41
+deepseekv3,full,double_quant,ep16,859,41
+deepseekv3,full,fp8flowmoe,ep32,779,49
+deepseekv3,full,perm_pad,ep32,768,50
+deepseekv3,full,double_quant,ep32,655,51
