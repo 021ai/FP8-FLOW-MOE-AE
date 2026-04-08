@@ -159,9 +159,8 @@ cd $FP8FLOWMOE_PATH/TransformerEngine-FP8FlowMoe
 export NVTE_FRAMEWORK=pytorch
 pip3 install --no-build-isolation .
 
-# 4. Install Megatron-LM
-cd $FP8FLOWMOE_PATH/Megatron-LM-FP8FlowMoe
-pip3 install --no-build-isolation .
+# 4. Set Megatron-LM/megatron env
+export PYTHONPATH=$FP8FLOWMOE_PATH/Megatron-LM-FP8FlowMoe:$PYTHONPATH
 ```
 
 ---

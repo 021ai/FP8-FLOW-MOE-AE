@@ -8,7 +8,7 @@ from typing import List
 
 import transformer_engine
 import transformer_engine_torch as tex
-from megatron.core.fusions.fused_quant_weighted_swiglu import (
+from megatron.core.fusions.fused_weighted_swiglu_quant import (
     fused_weighted_swiglu_quant,
     fused_weighted_swiglu_quant_back,
 )
@@ -94,7 +94,7 @@ def _test_swiglu_quant(
             fp8_quantize(fp8_recipe, weighted_swiglu_result)
 
         def fusion_weight_swiglu_quant():
-            fused_weighted_swiglu_quant(input, weights, fp8_recipe)
+            fused_weighted_swiglu_quant(input, weights)
 
         weight_swiglu_quant_time = perf_test_cuda_kernel(lambda: weight_swiglu_quant())
         fusion_weight_swiglu_quant_time = perf_test_cuda_kernel(lambda: fusion_weight_swiglu_quant())
@@ -104,7 +104,7 @@ def _test_swiglu_quant(
             fp8_quantize(fp8_recipe, tmp)
 
         def fusion_weight_swiglu_quant_back():
-            fused_weighted_swiglu_quant_back(grad_output, input, weights, fp8_recipe)
+            fused_weighted_swiglu_quant_back(grad_output, input, weights)
 
         weight_swiglu_quant_back_time = perf_test_cuda_kernel(lambda: weight_swiglu_quant_back())
         fusion_weight_swiglu_quant_back_time = perf_test_cuda_kernel(lambda: fusion_weight_swiglu_quant_back())
