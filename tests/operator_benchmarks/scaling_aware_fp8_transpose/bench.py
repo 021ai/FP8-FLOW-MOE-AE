@@ -139,7 +139,7 @@ def _test_scaling_aware_fp8_transpose(
             tex.split_quantize(naive_inp, m_splits, input_quantizers)
 
         def scaling_aware_transpose():
-            scaling_aware_transpose_inp_fp8.split_transpose_quantize(m_splits, input_quantizers)
+            scaling_aware_transpose_inp_fp8.split_scaling_aware_fp8_transpose(m_splits, input_quantizers)
 
         naive_time = perf_test_cuda_kernel(lambda: double_quant())
         scaling_aware_transpose_time = perf_test_cuda_kernel(lambda: scaling_aware_transpose())
